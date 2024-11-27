@@ -11,30 +11,37 @@
 
   const movies = ref([]);
 
-const listMovies = async (genreId) => {
-    const response = await api.get('discover/movie', {
-        params: {
-            with_genres: genreId,
-            language: 'pt-BR'
-        }
-    });
-    movies.value = response.data.results
-};
+  const listMovies = async (genreId) => {
+      const response = await api.get('discover/movie', {
+          params: {
+              with_genres: genreId,
+              language: 'pt-BR'
+          }
+      });
+      movies.value = response.data.results
+  };
 </script>
 
 <template>
-    <h1>Filmes</h1>
-    <ul class="genre-list">
-        <li v-for="genre in genres" :key="genre.id" @click="listMovies(genre.id)" class="genre-item">
-            {{ genre.name }}
-        </li>
-    </ul>
+  <h1>Filmes</h1>
+  <ul class="genre-list">
+    <li
+    v-for="genre in genres"
+    :key="genre.id"
+    @click="listMovies(genre.id)"
+    class="genre-item"
+  >
+    {{ genre.name }}
+  </li>
+  </ul>
 
-    <div class="movie-list">
+  <div class="movie-list">
   <div v-for="movie in movies" :key="movie.id" class="movie-card">
     
     <img
-      :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" :alt="movie.title"/>
+      :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
+      :alt="movie.title"
+    />
     <div class="movie-details">
       <p class="movie-title">{{ movie.title }}</p>
       <p class="movie-release-date">{{ movie.release_date }}</p>
@@ -43,9 +50,7 @@ const listMovies = async (genreId) => {
     
   </div>
 </div>
-
-   
-  </template>
+</template>
 
 <style scoped>
 .genre-list {
@@ -102,7 +107,6 @@ const listMovies = async (genreId) => {
   line-height: 1.3rem;
   height: 3.2rem;
 }
-
 </style>
 
   
