@@ -16,6 +16,11 @@ const routes = [
     name: 'TV',
     component: () => import('../views/TvView.vue'),
   },
+  {
+    path: '/brb',
+    name: 'Barbie',
+    component: () => import('../views/BarbieView.vue'),
+  },
 ];
 
 const router = createRouter({
