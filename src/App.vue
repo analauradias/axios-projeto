@@ -16,9 +16,10 @@ import { ref, onMounted } from 'vue';
 <template>
    <header>
     <nav>
-      <router-link to="/">Home</router-link>
-      <router-link to="/filmes">Filmes</router-link>
-      <router-link to="/tv">Programas de TV</router-link>
+      <router-link to="/">HOME</router-link>
+      <router-link to="/filmes" class="hover">FILMES</router-link>
+      <router-link to="/tv">PROGRAMAS DE TV</router-link>
+      <router-link to="/brb">BARBIE</router-link>
     </nav>
   </header>
   <main>
@@ -27,16 +28,19 @@ import { ref, onMounted } from 'vue';
 </template>
 
 <style scoped>
-  header {
-  height: 3rem;
+
+header {
+  height: 5rem;
   display: flex;
   background-color: black;
-  color: #fff;
-  font-size: 1.2rem;
+  color: #ffffff94;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
   padding-left: 2rem;
 }
 
 nav {
+  margin-left: 50vw;
   column-gap: 2rem;
   margin-bottom: 0;
   display: flex;
@@ -47,6 +51,11 @@ nav a {
   text-decoration: none;
   color: #fff;
 }
+
+main{
+  background-color: #12161af6;
+}
+
 </style>
 
 

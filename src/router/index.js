@@ -17,10 +17,17 @@ const routes = [
     component: () => import('../views/TvView.vue'),
   },
   {
+
     path: '/details/:id',
     name: 'Details',
     component: () => import('../views/MoviesDetailsView.vue'),
     props: true,
+      }
+      {
+    path: '/brb',
+    name: 'Barbie',
+    component: () => import('../views/BarbieView.vue'),
+
   },
 ];
 
