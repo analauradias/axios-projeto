@@ -22,8 +22,8 @@ const routes = [
     name: 'Details',
     component: () => import('../views/MoviesDetailsView.vue'),
     props: true,
-      }
-      {
+  },
+  {
     path: '/brb',
     name: 'Barbie',
     component: () => import('../views/BarbieView.vue'),
