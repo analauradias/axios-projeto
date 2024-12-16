@@ -1,3 +1,5 @@
+
+
 <template>
   <main class="main">
     <div class="title">
@@ -8,19 +10,20 @@
 <style scoped>
 
   *{
-    background-color: #12161af6;
+    background-color: #232629de;
   }
-  
+
   .main{
-    background-color: #12161af6;
     color: #fff;
     font-family: "Poppins", sans-serif;
     font-size: 0.9rem;
   }
 
   .title{
-    font-size: 0.5rem;
-    margin-top: 2vw;
+    font-size: 0.7rem;
+    text-align: center;
   }
+
+
 
 </style>
