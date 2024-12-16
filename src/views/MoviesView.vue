@@ -40,20 +40,37 @@ const getGenresByIds = (genreIds) => {
       return genre ? genre.name : '';
     }).join(', ');
 };
+
+const selectedGenre = ref(null); // Gênero selecionado
+
+onMounted(async () => {
+  const genresResponse = await api.get('genre/movie/list?language=pt-BR');
+  genres.value = genresResponse.data.genres;
+
+  // Configurar o gênero padrão (Thriller)
+  const thrillerGenre = genres.value.find((genre) => genre.name === 'Thriller');
+  selectedGenre.value = thrillerGenre ? thrillerGenre.id : genres.value[0].id;
+
+  // Listar os filmes do gênero padrão
+  listMovies(selectedGenre.value);
+});
+
+const handleGenreChange = () => {
+  listMovies(selectedGenre.value);
+};
 </script>
 
 <template>
   <h1>Filmes</h1>
-  <ul class="genre-list">
-    <li
-    v-for="genre in genres"
-    :key="genre.id"
-    @click="listMovies(genre.id)"
-    class="genre-item"
-  >
-    {{ genre.name }}
-  </li>
-  </ul>
+  
+  <div>
+  <!-- Select para gêneros -->
+  <select v-model="selectedGenre" @change="handleGenreChange">
+      <option v-for="genre in genres" :key="genre.id" :value="genre.id">
+        {{ genre.name }}
+      </option>
+    </select>
+  </div>
 
   <div class="movie-list">
   <div v-for="movie in movies" :key="movie.id" class="movie-card" @click="goToMovieDetails(movie.id)">
@@ -66,6 +83,7 @@ const getGenresByIds = (genreIds) => {
       <p class="movie-title">{{ movie.title }}</p>
       <p class="movie-release-date">{{ formatDate(movie.release_date) }}</p>
       <p class="movie-genres">{{ getGenresByIds(movie.genre_ids) }}</p>
+
     </div>
 
   </div>
