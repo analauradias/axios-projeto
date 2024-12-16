@@ -90,7 +90,7 @@ footer{
 .footer{
   background-color: #2C3440;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 </style>
