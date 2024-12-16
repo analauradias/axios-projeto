@@ -1,6 +1,7 @@
 <script setup>
   import { ref, onMounted } from 'vue';
   import api from '@/plugins/axios';
+  import { useRouter } from 'vue-router';
 
   const genres = ref([]);
 
@@ -20,6 +21,25 @@
       });
       movies.value = response.data.results
   };
+
+  // Redirecionando para a página de detalhes
+  const router = useRouter();
+  const goToMovieDetails = (movieId) => {
+    router.push({ name: 'Details', params: { id: movieId } });
+  };
+
+  const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('pt-BR'); // Formato: dd/mm/ano
+};
+
+const getGenresByIds = (genreIds) => {
+  return genreIds
+    .map((id) => {
+      const genre = genres.value.find((g) => g.id === id);
+      return genre ? genre.name : '';
+    }).join(', ');
+};
 </script>
 
 <template>
@@ -36,18 +56,18 @@
   </ul>
 
   <div class="movie-list">
-  <div v-for="movie in movies" :key="movie.id" class="movie-card">
-    
+  <div v-for="movie in movies" :key="movie.id" class="movie-card" @click="goToMovieDetails(movie.id)">
+
     <img
       :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
       :alt="movie.title"
     />
     <div class="movie-details">
       <p class="movie-title">{{ movie.title }}</p>
-      <p class="movie-release-date">{{ movie.release_date }}</p>
-      <p class="movie-genres">{{ movie.genre_ids }}</p>
+      <p class="movie-release-date">{{ formatDate(movie.release_date) }}</p>
+      <p class="movie-genres">{{ getGenresByIds(movie.genre_ids) }}</p>
     </div>
-    
+
   </div>
 </div>
 </template>
@@ -109,4 +129,4 @@
 }
 </style>
 
-  
+
