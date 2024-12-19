@@ -16,7 +16,7 @@ import { ref, onMounted } from 'vue';
 <template>
    <header>
     <div>
-      <img src="/src/assets/Letter.png" alt="">
+      <img src="/src/assets/Letter.png" alt="" >
     </div>
     <nav>
       <router-link class="nav" to="/">HOME</router-link>
@@ -28,15 +28,6 @@ import { ref, onMounted } from 'vue';
   <main>
     <router-view />
   </main>
-
-  <footer>
-    <div class="img-footer">
-      <img src="/src/assets/Footer.png" alt="">
-    </div>
-    <div class="footer">
-      <h1 class="footer">© 2024 Lettermovie. Todos os direitos reservados</h1>
-    </div>
-  </footer>
 </template>
 
 <style scoped>
