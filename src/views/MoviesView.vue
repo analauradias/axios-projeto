@@ -41,17 +41,15 @@ const getGenresByIds = (genreIds) => {
     }).join(', ');
 };
 
-const selectedGenre = ref(null); // Gênero selecionado
+const selectedGenre = ref(null);
 
 onMounted(async () => {
   const genresResponse = await api.get('genre/movie/list?language=pt-BR');
   genres.value = genresResponse.data.genres;
 
-  // Configurar o gênero padrão (Thriller)
   const thrillerGenre = genres.value.find((genre) => genre.name === 'Thriller');
   selectedGenre.value = thrillerGenre ? thrillerGenre.id : genres.value[0].id;
 
-  // Listar os filmes do gênero padrão
   listMovies(selectedGenre.value);
 });
 
@@ -62,15 +60,18 @@ const handleGenreChange = () => {
 
 <template>
   <h1>Filmes</h1>
-  
-  <div>
+
+  <div class="select">
   <!-- Select para gêneros -->
+   <p><strong>Gênero</strong></p>
   <select v-model="selectedGenre" @change="handleGenreChange">
       <option v-for="genre in genres" :key="genre.id" :value="genre.id">
         {{ genre.name }}
       </option>
     </select>
   </div>
+
+  <!-- Lista dos filmes -->
 
   <div class="movie-list">
   <div v-for="movie in movies" :key="movie.id" class="movie-card" @click="goToMovieDetails(movie.id)">
@@ -91,6 +92,12 @@ const handleGenreChange = () => {
 </template>
 
 <style scoped>
+
+h1{
+  font-style: bold;
+  text-align: center;
+}
+
 .genre-list {
   display: flex;
   justify-content: center;
@@ -118,21 +125,18 @@ const handleGenreChange = () => {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-left: 3%;
 }
 
 .movie-card {
   width: 15rem;
   height: 30rem;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  box-shadow: 0 0 0.5rem #000;
+  border: 0.5px solid rgba(255, 255, 255, 0.11);
 }
 
 .movie-card img {
   width: 100%;
   height: 20rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem #000;
 }
 
 .movie-details {
@@ -145,6 +149,22 @@ const handleGenreChange = () => {
   line-height: 1.3rem;
   height: 3.2rem;
 }
+
+select{
+  background-color:  #232629de;
+  border-color: rgba(255, 255, 255, 0.479);
+  border-radius: 0%;
+  padding: 0.2%;
+  margin-left: 0.5%;
+  margin-bottom: 1.5%;
+}
+
+.select{
+  display: flex;
+  flex-direction: row;
+  margin-left: 3%;
+}
+
 </style>
 
 
